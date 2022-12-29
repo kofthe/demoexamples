@@ -12,6 +12,6 @@ public interface StudentService {
 
     List<GetAllStudentsDto> getAll();
 
-
+    StudentDto findById(Long id);
 
 }

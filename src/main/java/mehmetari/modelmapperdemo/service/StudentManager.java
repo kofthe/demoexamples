@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentManager implements StudentService{
@@ -30,7 +31,18 @@ public class StudentManager implements StudentService{
 
     @Override
     public List<GetAllStudentsDto> getAll() {
-        return null;
+        List<Student> studentList = studentRepository.findAll();
+        List<GetAllStudentsDto> getAllStudentsDtoList = studentList.stream()
+                .map(student -> modelMapper.map(student, GetAllStudentsDto.class))
+                .collect(Collectors.toList());
+        return getAllStudentsDtoList;
+    }
+
+    @Override
+    public StudentDto findById(Long id) {
+        Student student = studentRepository.findById(id).get();
+        StudentDto studentDto = modelMapper.map(student, StudentDto.class);
+        return studentDto;
     }
 
 
