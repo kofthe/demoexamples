@@ -18,7 +18,7 @@ public class Student {
     private String lastName;
     private int studentNo;
     private String email;
-
     private String createdBy;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    private School school;
 }
